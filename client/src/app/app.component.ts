@@ -10,7 +10,7 @@ import { ShoppingCartService } from './shopping-cart/shopping-cart.service';
 export class AppComponent implements OnInit {
   title = 'Mikenet';
 
-  constructor(private shoppingCartService: ShoppingCartService, private accountService: AccountService) {}
+  constructor(private shoppingCartService: ShoppingCartService, private accountService: AccountService) { }
 
   ngOnInit(): void {
     this.loadShoppingCart();
@@ -19,13 +19,11 @@ export class AppComponent implements OnInit {
 
   loadCurrentUser() {
     const token = localStorage.getItem('token');
-    if (token) {
-      this.accountService.loadCurrentUser(token).subscribe(() => {
-        console.log('loaded user');
-      }, error => {
-        console.log(error);
-      });
-    }
+    this.accountService.loadCurrentUser(token).subscribe(() => {
+      console.log('loaded user');
+    }, error => {
+      console.log(error);
+    });
   }
 
   loadShoppingCart() {
